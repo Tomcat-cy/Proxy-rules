@@ -1,20 +1,39 @@
-# Apple Intelligence / Siri / Relay rules
-# Route these domains to a supported-region proxy group, such as a US node.
+# Apple Intelligence / Siri 基础规则
+# 将此规则集指向支持地区的代理组，例如美国节点
+
+# Siri 与搜索
 DOMAIN,guzzoni.apple.com
-DOMAIN,mask-api.fe.apple-dns.net
-DOMAIN,mask-api.icloud.com
-DOMAIN,mask-t.apple-dns.net
-DOMAIN,mask.apple-dns.net
 DOMAIN-SUFFIX,smoot.apple.com
+
+# Apple Intelligence 扩展与私有云计算（PCC）
 DOMAIN-SUFFIX,apple-relay.apple.com
 DOMAIN-SUFFIX,apple-relay.cloudflare.com
 DOMAIN-SUFFIX,apple-relay.fastly-edge.com
-DOMAIN-SUFFIX,apple-relay.mask.apple-dns.net
 DOMAIN-SUFFIX,cp4.cloudflare.com
-DOMAIN-SUFFIX,gspe1-ssl.ls.apple.com
-DOMAIN-SUFFIX,gateway.icloud.com
-DOMAIN-SUFFIX,ls.apple.com
-DOMAIN-SUFFIX,mask-h2.icloud.com
-DOMAIN-SUFFIX,mask.icloud.com
-DOMAIN-SUFFIX,apps.mzstatic.com
-DOMAIN-KEYWORD,siri
+
+# 以下不是基础必需项，默认注释，按连接日志和实际需求启用
+
+# iCloud 专用代理相关
+# DOMAIN,mask-api.fe.apple-dns.net
+# DOMAIN,mask-api.icloud.com
+# DOMAIN,mask-t.apple-dns.net
+# DOMAIN,mask.apple-dns.net
+# DOMAIN-SUFFIX,mask-h2.icloud.com
+# DOMAIN-SUFFIX,mask.icloud.com
+
+# 补充 Relay 域名，按实际连接启用
+# DOMAIN-SUFFIX,apple-relay.mask.apple-dns.net
+
+# 位置服务相关，分流范围较大
+# DOMAIN-SUFFIX,ls.apple.com
+# 下项已被 ls.apple.com 后缀规则覆盖，无需同时启用
+# DOMAIN-SUFFIX,gspe1-ssl.ls.apple.com
+
+# CloudKit 等资源，超出 AI 基础范围
+# DOMAIN-SUFFIX,gateway.icloud.com
+
+# 商店内容，非 AI 基础必需项
+# DOMAIN-SUFFIX,apps.mzstatic.com
+
+# 匹配范围过宽，建议保持注释
+# DOMAIN-KEYWORD,siri
